@@ -1,0 +1,17 @@
+dop	10
+ta	13
+jam	1
+goon	12
+moo	2
+acb	0
+arai	0
+eiei	21
+dop	1
+name	7
+cop	15
+dd	16
+abc	4
+dop	3
+nan	1
+DoopDip	7
+DoopDip	2
