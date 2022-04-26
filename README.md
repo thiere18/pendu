@@ -1,8 +1,2 @@
-# HangmanGame
-Simple game in c programming
+projet C 
 
-
-
-## Example
-
-<img src="https://github.com/DoopDip/HangmanGame/blob/master/example.gif">
