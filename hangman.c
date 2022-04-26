@@ -1,19 +1,21 @@
 #include <stdio.h>
 #include <ctype.h>
-#include <conio.h>
+#include<time.h>
+#include<string.h>
 #include <stdlib.h>
 
-//        เก็บค่าเลเวลที่ผู้เล่นเลือก, ,  เก็บคะแนน  , ตอบผิด+1
+int page1();
+int page2();
+int page3();
+int page4();
+int page5();
 int level_num,score=0,fail=0;
-//             ชื่อผู้เล่น
 char id[50];
-
 
 struct all_word
 {
-      // จำนวนอักษรของคำ ,    จำนวนคำศัพท์ที่มีในไฟล์ , เก็บลำดับคำที่จะเล่น
     int num[100],all,play[100];
-    //             คำซัพท์ภาษา eng    , เก็บคำที่ผ่านการซ่อนแล้ว
+    //             ๏ฟฝำซัพ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ eng    , ๏ฟฝ็บคำท๏ฟฝ๏ฟฝ๏ฟฝาน๏ฟฝ๏ฟฝรซ๏ฟฝอน๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
     char words[100][100],hide[100][100];
 
 }word;
@@ -68,23 +70,18 @@ void hangman(int a)
 }
 
 
-// ดึงคำศัพท์จากไฟล์เข้าในตัวแปร หาจำนวนคำศัท์ หาจำนวนอักษรแต่ละตัวในคำศัพท์
+// ๏ฟฝึง๏ฟฝ๏ฟฝ๏ฟฝัพ๏ฟฝ๏ฟฝาก๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝในต๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ ๏ฟฝาจำนวน๏ฟฝ๏ฟฝ๏ฟฝัท๏ฟฝ ๏ฟฝาจำนวน๏ฟฝัก๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝะต๏ฟฝ๏ฟฝในค๏ฟฝ๏ฟฝัพ๏ฟฝ๏ฟฝ
 void chack_word()
 {
-    /*
-        word.all = จำนวนคำศัพท์ที่มีในไฟล์
-        word.words[0] = คำซัพท์ภาษา eng คำที่ 1
-        word.num[0] = จำนวนอักษรของคำที่ 1
-    */
     FILE *fptr;
     fptr = fopen("word.txt","r");
     int i=0,j;
     if(fptr==NULL)
         exit(1);
-    while(fscanf(fptr,"%s",word.words[i])!=EOF) //เก็บคำลงในตัวแปร
+    while(fscanf(fptr,"%s",word.words[i])!=EOF) //๏ฟฝ็บค๏ฟฝลงในต๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
     {
         j=0;
-        while(word.words[i][j]!='\0') //เช็คจำนวนตัวอักษรต่อคำ
+        while(word.words[i][j]!='\0') //๏ฟฝ็คจำนวน๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝัก๏ฟฝรต๏ฟฝอค๏ฟฝ
         {
             j++;
         }
@@ -101,7 +98,7 @@ void add_hide_word()
     int i=0,j;
     if(fptr==NULL)
         exit(1);
-    while(fscanf(fptr,"%s",word.hide[i])!=EOF) //เก็บคำลงในตัวแปร
+    while(fscanf(fptr,"%s",word.hide[i])!=EOF) //๏ฟฝ็บค๏ฟฝลงในต๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
     {
         i++;
     }
@@ -110,14 +107,8 @@ void add_hide_word()
 
 
 
-void random(int a,int b,int c,int d)
+void randoms(int a,int b,int c,int d)
 {
-    /*
-        a = จำนวนครั้งที่สุ่ม
-        b = สุ่มจาก ไหนถึงไหน
-        c = โหมดที่ใช้เก็บในตัวแปร.....
-        d = ไว้สำหรับ word.hide เพื่ออ้างอิงคำที่......    ( ไม่ใช่ใส่ 0 )
-    */
 	int result[a],i,value,counter;
 	char chFound;
 
@@ -172,7 +163,7 @@ int level(int a,int b)
 
 int admin()
 {
-    system("cls");
+    system("clear");
     char num;
     do
     {
@@ -181,16 +172,16 @@ int admin()
         printf("\t\t\t\t  [1] Add word\n\t\t\t\t  [2] Clear word\n\t\t\t\t  [3] Clear score\n\t\t\t\t  [4] Back to Home\n\n");
         printf("\t\t\t    Please enter your number : ");
         scanf("%c",&num);
-        system("cls");
+        system("clear");
     } while(!(num=='1'||num=='2'||num=='3'||num=='4'));
     FILE *fptr;
     char add[20];
-    if(num=='1') //เพิ่มคำศัพท์ลงในไฟล์
+    if(num=='1') //๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝัพ๏ฟฝ๏ฟฝลง๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
     {
         fptr = fopen("word.txt","a");
         do
         {
-            system("cls");
+            system("clear");
             logo(2);
             logo(3);
             printf("\t\t\t\t  [1] Add word\n\n");
@@ -199,36 +190,36 @@ int admin()
             fprintf(fptr,"%s\n",add);
             printf("\n\n\t\t\t\t  Add complete!");
             printf("\n\n\n\n\t\t\t  Do you want to continue (Y/N)");
-        }while(tolower(getch())=='y');
+        }while(tolower(getchar())=='y');
         fclose(fptr);
     }
-    else if(num=='2') //ล้างคำศัพท์ทั้งหมด
+    else if(num=='2') //๏ฟฝ๏ฟฝาง๏ฟฝ๏ฟฝ๏ฟฝัพ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
     {
-        system("cls");
+        system("clear");
         logo(2);
         logo(3);
         printf("\t\t\t\t  [2] Clear word\n\n");
         printf("\n\n\t\t        Do you want to delete all word (Y/N)");
-        if(tolower(getch())=='y')
+        if(tolower(getchar())=='y')
         {
             fptr = fopen("word.txt","w");
             printf("\n\n\t\t\t\t  Delete complete!");
-            getch();
+            getchar();
             fclose(fptr);
         }
     }
-    else if(num=='3') //ล้างคะแนนของผู้เล่นทั้งหมด
+    else if(num=='3') //๏ฟฝ๏ฟฝาง๏ฟฝ๏ฟฝแนน๏ฟฝอง๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ่นท๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
     {
-        system("cls");
+        system("clear");
         logo(2);
         logo(3);
         printf("\t\t\t\t  [3] Clear score\n\n");
         printf("\n\n\t\t        Do you want to delete all score (Y/N)");
-        if(tolower(getch())=='y')
+        if(tolower(getchar())=='y')
         {
             fptr = fopen("score.txt","w");
             printf("\n\n\t\t\t\t  Delete complete!");
-            getch();
+            getchar();
             fclose(fptr);
         }
     }
@@ -237,7 +228,7 @@ int admin()
 }
 
 
-void answer(char a,int b) // a=คำตอบ / b=ลำดับการเล่น
+void answer(char a,int b) // a=๏ฟฝำตอบ / b=๏ฟฝำดับ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
 {
     int i,count=0;
     for(i=0;i<word.num[b];i++)
@@ -257,7 +248,7 @@ void answer(char a,int b) // a=คำตอบ / b=ลำดับการเล่น
         fail++;
 }
 
-int chack_answer(int a) //a=ลำดับการเล่น
+int chack_answer(int a) //a=๏ฟฝำดับ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
 {
     int i,count=0;
     for(i=0;i<word.num[a];i++)
@@ -313,23 +304,23 @@ void top_score()
 
 int page1()
 {
-    system("cls");
+    system("clear");
     printf("\n\n\n\n     Welcome to\n");
     logo(1);
     printf("\n\n\n\n\t\t\t\tPress any key ");
-    getch();
+    getchar();
     return 2;
 }
 
 int page2()
 {
-    system("cls");
+    system("clear");
     logo(2);
     printf("\n\t\t\t\t  Your name : ");
     scanf("%s",id);
     printf("\n\n\t\t\t >> WELCOME TO THE HANGMAN GAME <<\n\n\n\n\n\n");
     printf("\t\t\t\t   Pres any key");
-    getch();
+    getchar();
     if (id[0]=='a'&&id[1]=='d'&&id[2]=='m'&&id[3]=='i'&&id[4]=='n'&&id[5]=='\0') //chack word for admin
         {
             admin();
@@ -341,11 +332,11 @@ int page2()
 
 int page3()
 {
-    system("cls");
+    system("clear");
     char num;
     do
     {
-        system("cls");
+        system("clear");
         logo(2);
         printf("\t\t\t\t  -Select level-\n\n");
         printf("\t\t\t\t   [1] level 1\n\t\t\t\t   [2] level 2\n\t\t\t\t   [3] level 3\n\n");
@@ -366,18 +357,18 @@ int page3()
 
 int page4()
 {
-    system("cls");
+    system("clear");
     int i;
     char sum;
-    random(word.all,word.all,1,1); //สุ่มลำดับการเล่น
+    randoms(word.all,word.all,1,1); //๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝำดับ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
     for(i=0;i<word.all;i++)
-        random(level(level_num,i),word.num[i],2,i); //สุ่มอักษรที่ซ่อนของแต่ละคำ
+        randoms(level(level_num,i),word.num[i],2,i); //๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝัก๏ฟฝรท๏ฟฝ๏ฟฝ๏ฟฝอน๏ฟฝอง๏ฟฝ๏ฟฝ๏ฟฝะค๏ฟฝ
 
     for(i=0;i<word.all;i++)
     {
         do
         {
-            system("cls");
+            system("clear");
             logo(2);
             printf("\t\t\t\t\t\t\t   Score : %d\n",score);
             hangman(fail);
@@ -385,11 +376,11 @@ int page4()
             printf("\t\t\t      Please enter the answer ?");
             if(fail==6)
                 return 5;
-            sum = getch();
+            sum = getchar();
             answer(sum,word.play[i]);
         }while(chack_answer(word.play[i])!=1);
 
-        system("cls");
+        system("clear");
         logo(2);
         printf("\t\t\t\t\t\t\t   Score : %d\n",score);
         hangman(fail);
@@ -397,7 +388,7 @@ int page4()
         printf("\t\t\t\t     Complete!\n\n");
         printf("\007");
         printf("\t\t\t       Press any key for next");
-        getch();
+        getchar();
     }
     return 5;
 
@@ -405,11 +396,11 @@ int page4()
 
 int page5()
 {
-    system("cls");
+    system("clear");
     logo(1);
     printf("\n\n\n\t\t\t\t...GAME OVER...");
     printf("\n\n\n\t\t\t       [ %s ] score = %d\n\n\n",id,score);
     top_score();
-    getch();
+    getchar();
     return 6;
 }
